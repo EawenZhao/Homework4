@@ -13,7 +13,8 @@ protected:
 
     struct BiTNode {
         char data;
-        BiTNode *lchild, *rchild;
+        BiTNode *lchild = NULL;
+        BiTNode *rchild = NULL;
     };
 
     BiTNode *root{};
@@ -76,6 +77,8 @@ public:
             if (GList[i] == '(') {
                 NodeStack.top()->lchild = (BiTNode*)std::malloc(sizeof(BiTNode));
                 NodeStack.top()->lchild->data = GList[i + 1];
+                NodeStack.top()->lchild->lchild = nullptr;
+                NodeStack.top()->lchild->rchild = nullptr;
                 NodeStack.push(NodeStack.top()->lchild);
             }
 
@@ -83,6 +86,8 @@ public:
                 NodeStack.pop();
                 NodeStack.top()->rchild = (BiTNode*)std::malloc(sizeof(BiTNode));
                 NodeStack.top()->rchild->data = GList[i + 1];
+                NodeStack.top()->rchild->lchild = nullptr;
+                NodeStack.top()->rchild->rchild = nullptr;
                 NodeStack.push(NodeStack.top()->rchild);
             }
 
